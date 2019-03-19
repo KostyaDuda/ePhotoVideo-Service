@@ -49,9 +49,10 @@ use yii\widgets\ActiveForm;
                 <?= Html::submitButton('Зберегти', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
         </div>
+        <?php ActiveForm::end(); ?>
         <br>
         <br>
         <br>
         <br>
-    <?php ActiveForm::end(); ?>
+
     <?php endif; ?>

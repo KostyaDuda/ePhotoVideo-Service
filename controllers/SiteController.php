@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
+use app\models\SetingsForm;
 use app\models\ContactForm;
 use app\models\Raiting;
 use app\models\User_fv;
@@ -97,12 +98,23 @@ class SiteController extends Controller
     public function actionSettings($id)
     {
         $user_one = User_fv::findOne($id);
+
+        if(Yii::$app->request->isPost)
+        {
+            $user_one->load(Yii::$app->request->post());
+            if($user_one->setings_update())
+            {
+                return $this->redirect(['site/view/','id'=>$id]);
+            }
+        }
         return $this->render('settings',
         [
             'user_one'=>$user_one
         ]
     );
     }
+
+
 
 
     public function actionRaiting()
