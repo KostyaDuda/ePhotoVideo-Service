@@ -9,10 +9,12 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\SetingsForm;
+use app\models\ImageUpload;
 use app\models\ContactForm;
 use app\models\Raiting;
 use app\models\User_fv;
 use yii\data\Pagination;
+use yii\web\UploadedFile;
 
 class SiteController extends Controller
 {
@@ -114,7 +116,23 @@ class SiteController extends Controller
     );
     }
 
+    public function actionSetImage($id)
+    {
+        $model = new ImageUpload;
 
+        if (Yii::$app->request->isPost)
+        {
+            $user = User_fv::findOne($id);
+            $file = UploadedFile::getInstance($model, 'image');
+
+            if($user->saveImage($model->uploadFile($file, $user->img)))
+            {
+                return $this->redirect(['site/settings', 'id'=>$user->id]);
+            }
+        }
+        
+        return $this->render('upload_avatar', ['model'=>$model]);
+    }
 
 
     public function actionRaiting()

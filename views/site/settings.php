@@ -20,6 +20,7 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
     <?php $form = ActiveForm::begin(); ?>
+    <?= Html::a('Змынити фоторафію коритсувача', ['set-image', 'id' => $user_one->id], ['class' => 'btn btn-default']) ?>
     <?= $form->field($user_one, 'username')->textInput() ?>
 
       <?= $form->field($user_one, 'email')->textInput()?>
@@ -49,7 +50,12 @@ use yii\widgets\ActiveForm;
                 <?= Html::submitButton('Зберегти', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
         </div>
+        
         <?php ActiveForm::end(); ?>
+
+       
+
+       </div>
         <br>
         <br>
         <br>

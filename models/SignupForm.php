@@ -33,6 +33,7 @@ class SignupForm extends Model
             $user->type = $this->type;
             $user->password = $this->password;
             $user->status = 0;
+            $user->img = "no-image.jpg";
             return $user->save();
         }
     }
