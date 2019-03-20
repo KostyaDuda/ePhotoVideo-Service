@@ -13,6 +13,7 @@ use app\models\ImageUpload;
 use app\models\ContactForm;
 use app\models\Raiting;
 use app\models\User_fv;
+use app\models\User_content;
 use yii\data\Pagination;
 use yii\web\UploadedFile;
 
@@ -91,9 +92,11 @@ class SiteController extends Controller
     public function actionView($id)
     {
         $user_one = User_fv::findOne($id);
+       $contents = User_content::find()->where(['user_id'=> $id])->all();
         return $this->render('view',
         [
-            'user_one'=>$user_one
+            'user_one'=>$user_one,
+            'contents' => $contents
         ]
     );
     }
@@ -119,7 +122,6 @@ class SiteController extends Controller
     public function actionSetImage($id)
     {
         $model = new ImageUpload;
-
         if (Yii::$app->request->isPost)
         {
             $user = User_fv::findOne($id);
@@ -146,5 +148,7 @@ class SiteController extends Controller
             'pagination'=>$pagination
             ]);
     }
+
+
 
 }

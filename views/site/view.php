@@ -101,55 +101,38 @@ use yii\helpers\Html;
                             </div>
                         </div>
                         
-                        
-                        <div class="related-products-wrapper">
+            
+                            
                             <h2 class="related-products-title">Портфоліо</h2>
-                            <div class="related-products-carousel">
-                                <div class="single-product">
-                                    <div class="product-f-image">
-                                        <img src="img/product-1.jpg" alt="">
-                                        <div class="content">
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="single-product">
-                                        <div class="product-f-image">
-                                            <img src="img/product-1.jpg" alt="">
-                                            <div class="content">
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="single-product">
-                                            <div class="product-f-image">
-                                                <img src="img/product-1.jpg" alt="">
-                                                <div class="content">
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="single-product">
-                                                <div class="product-f-image">
-                                                    <img src="img/product-1.jpg" alt="">
-                                                    <div class="content">
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="single-product">
-                                                    <div class="product-f-image">
-                                                        <img src="img/product-1.jpg" alt="">
-                                                        <div class="content">
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                      
-                                                            
-                            </div>
-                        </div>
-                                       
+                    
+                            <div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Відео</a></li>
+    <li><a href="#tabs-2">Фото</a></li>
+  </ul>
+  <div id="tabs-1" class="tab-content">
+    <?php foreach($contents as $content):?>
+    <?php if($content->type == "відео"): ?>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/<?= $content->content ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <?php endif; ?>
+    <?php endforeach; ?>
+  </div>
+  <div id="tabs-2">
+  <?php foreach($contents as $content):?>
+    <?php if($content->type == "фото"): ?>
+    <p><?= $content->content ?></p>
+    <img width="400px" src="<?= $content->getImage_content()?>">
+
+    <?php endif; ?>
+    <?php endforeach; ?>
+  </div>
+</div>         
                 </div>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script>
+  $( function() {
+    $( "#tabs" ).tabs();
+  } );
+  </script>
