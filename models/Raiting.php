@@ -8,9 +8,9 @@ class Raiting extends ActiveRecord{
         return 'user';
     }
     
-    public function getImage()
+    public function getImage_raiting()
     {
-        return ($this->image) ? '/img/' . $this->img : '/no-image.jpg';
+        return ($this->img) ? '/uploads/' . $this->img : '/uploads/no-image.jpg';
     }
 }
 ?>

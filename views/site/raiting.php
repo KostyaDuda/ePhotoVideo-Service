@@ -60,7 +60,7 @@ use yii\widgets\LinkPager;
                     <div class=" col-lg-12 col-md-12 col-sm-12">
                         <div class="single-shop-product">
                             <div class="product-upper">
-                                <img id="img_float" width="300px" src="<?=$user->getImage() ?>" alt="">
+                                <img id="img_float" width="300px" src="<?=$user->getImage_raiting() ?>" alt="">
                                 <div class="name_in_raiting">
                                     <h2><a  href="<?= Url::toRoute(['site/view', 'id'=>$user->id]);?>"><?= $user->username?></a></h2>
                                     <p class="user-type"><?= $user->type?></p>

@@ -26,10 +26,7 @@ class User_fv extends ActiveRecord implements \yii\web\IdentityInterface{
             [['email'], 'unique', 'targetClass'=>'app\models\User_fv', 'targetAttribute'=>'email']
         ];
     }
-    public function getuserImage()
-    {
-        return ($this->image) ? '/img/' . $this->img : '/no-image.jpg';
-    }
+
     // private static $users = [
     //     '100' => [
     //         'id' => '100',
@@ -164,13 +161,9 @@ class User_fv extends ActiveRecord implements \yii\web\IdentityInterface{
     }
     public function getImage()
     {
-        return ($this->img) ? '/uploads/' . $this->img : '/no-image.png';
+        return ($this->img) ? '/uploads/' . $this->img : '/uploads/no-image.jpg';
     }
-    public function deleteImage()
-    {
-        $imageUploadModel = new ImageUpload();
-        $imageUploadModel->deleteCurrentImage($this->img);
-    }
+
     public function beforeDelete()
     {
         $this->deleteImage();
