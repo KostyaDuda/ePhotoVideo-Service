@@ -102,7 +102,12 @@ class SiteController extends Controller
     }
     public function actionSettings($id)
     {
+        if($id != Yii::$app->user->identity->id)
+            throw new \yii\web\ForbiddenHttpException("У вас немає прав для редагування даного користувача");
+
         $user_one = User_fv::findOne($id);
+        if(!$user_one)
+            throw new \yii\web\NotFoundHttpException("Користувач не знайдений");
 
         if(Yii::$app->request->isPost)
         {
@@ -153,10 +158,25 @@ class SiteController extends Controller
         return $this->render('upload_avatar', ['model'=>$model]);
     }
 
+    public function actionSetVideo()
+    {     
+        $model = new User_content();
+        if(Yii::$app->request->isPost)
+        {
+            $model->load(Yii::$app->request->post());
+            if($model->saveVideo(Yii::$app->user->id))
+            {
+                return $this->redirect(['view','id'=>Yii::$app->user->id]);
+            }
+        }
+        return $this->render('insert_video', ['model'=>$model]);
+    }
+
 
     public function actionRaiting()
     {
         $query = Raiting::find();//->Where(['>', 'status', 0]);
+        
         $count = $query->count();
         $pagination = new Pagination(['totalCount' => $count,'pageSize'=>2]);
         $users = $query->offset($pagination->offset)->limit($pagination->limit)->all();     
@@ -166,11 +186,12 @@ class SiteController extends Controller
             ]);
     }
 
-    public function actionDeleteContent($id,$user_id)
+    public function actionDeleteContent($id)
     {
-        $content = User_content::find($id);
+        $content = User_content::find()->where(['id'=>$id])->one();
         $content->delete();
-        return $this->redirect(['site/view', 'id'=>$user_id]);
+
+        return $this->redirect(['view', 'id'=>Yii::$app->user->id]);
     }
 
 

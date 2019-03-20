@@ -3,6 +3,15 @@ namespace app\models;
 use yii\db\ActiveRecord;
 
 class User_content extends ActiveRecord{
+    public function rules()
+    {
+        return [
+            [['content'], 'required'],
+            [['content'], 'string'],
+            [['user_id'],'string'],
+            [['type'], 'string']
+        ];
+    }
     public static function tableName()
     {
         return 'User_content';
@@ -22,4 +31,16 @@ class User_content extends ActiveRecord{
         $this->type = $type;
         return $this->save(false);
     }
+    public function saveVideo($id)
+    {
+        $user_content = new User_content;
+        $user_content->user_id  = $id;
+        $user_content->type  = "відео";
+        $user_content->content  = $this->content;
+        return $user_content->save(false);
+    }
+
+
+
+
 }

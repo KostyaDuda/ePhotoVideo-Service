@@ -111,21 +111,20 @@ use yii\helpers\Html;
                                    <li><a href="#tabs-2">Фото</a></li>
                                  </ul>
                                  <div id="tabs-1" class="tab-content">
-                                 <?= Html::a('Додати відео', ['set-image', 'id' => $user_one->id], ['class' => 'btn btn-default']) ?>
+                                 <?= Html::a('Додати відео', ['set-video', 'id' => $user_one->id], ['class' => 'btn btn-default']) ?>
                                    <?php foreach($contents as $content):?>
                                    <?php if($content->type == "відео"): ?>
-                                   <?= Html::a('X', ['delete-content', 'id' => $content->id], ['class' => 'btn btn-default']) ?>
+                                   <?= Html::a('X', ['delete-content', 'id' => $content->id], ['class' => 'btn btn-default']) ?>                  
                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/<?= $content->content ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                   <?php endif; ?>
+                                    <?php endif; ?>
                                    <?php endforeach; ?>
                                  </div>
                                  <div id="tabs-2">
                                  <?= Html::a('Завантажити фото', ['set-content', 'id' => $user_one->id], ['class' => 'btn btn-default']) ?>
                                  <?php foreach($contents as $content):?>
-                                   <?php if($content->type == "фото"): ?>
-                                   <?= Html::a('X', ['delete-content', 'id' => $content->id, 'user_id'=>$user_one->id], ['class' => 'btn btn-default']) ?>
+                                 <?php if($content->type == "фото"): ?>
+                                   <?= Html::a('X', ['delete-content', 'id' => $content->id,], ['class' => 'btn btn-default']) ?>
                                    <img width="500px" src="<?= $content->getImage_content()?>">
-                               
                                    <?php endif; ?>
                                    <?php endforeach; ?>
                                  </div>
@@ -134,6 +133,7 @@ use yii\helpers\Html;
                                            </div>
                                        </div>
                                        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+                                      
                                        <script>
                                  $( function() {
                                    $( "#tabs" ).tabs();

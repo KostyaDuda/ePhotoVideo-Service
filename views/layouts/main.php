@@ -67,8 +67,8 @@ AppAsset::register($this);
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav list_margin">
                         <li><a href="/">Головна</a></li>
-                        <li><a href="auth/login">Увійти</a></li>
-                        <li><a href="auth/signup">Зареєструватися</a></li>
+                        <li><a href="<?=Url::toRoute(['/login'])?>">Увійти</a></li>
+                        <li><a href="<?=Url::toRoute(['auth/signup'])?>">Зареєструватися</a></li>
                     </ul>
                 </div>  
             </div>

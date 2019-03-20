@@ -34,7 +34,9 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '<site>' => 'site/<action>',
+                '<controller>/<action>/<id:\d+>' => '<controller>/<action>',
+                '<action>/<id:\d+>' => '<action>',
+                '<action:(login|signup)>' => 'auth/<action>',
             ],
         ],
         
