@@ -106,33 +106,36 @@ use yii\helpers\Html;
                             <h2 class="related-products-title">Портфоліо</h2>
                     
                             <div id="tabs">
-  <ul>
-    <li><a href="#tabs-1">Відео</a></li>
-    <li><a href="#tabs-2">Фото</a></li>
-  </ul>
-  <div id="tabs-1" class="tab-content">
-    <?php foreach($contents as $content):?>
-    <?php if($content->type == "відео"): ?>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/<?= $content->content ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    <?php endif; ?>
-    <?php endforeach; ?>
-  </div>
-  <div id="tabs-2">
-  <?php foreach($contents as $content):?>
-    <?php if($content->type == "фото"): ?>
-    <p><?= $content->content ?></p>
-    <img width="400px" src="<?= $content->getImage_content()?>">
-
-    <?php endif; ?>
-    <?php endforeach; ?>
-  </div>
-</div>         
-                </div>
-            </div>
-        </div>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script>
-  $( function() {
-    $( "#tabs" ).tabs();
-  } );
-  </script>
+                                 <ul>
+                                   <li><a href="#tabs-1">Відео</a></li>
+                                   <li><a href="#tabs-2">Фото</a></li>
+                                 </ul>
+                                 <div id="tabs-1" class="tab-content">
+                                 <?= Html::a('Додати відео', ['set-image', 'id' => $user_one->id], ['class' => 'btn btn-default']) ?>
+                                   <?php foreach($contents as $content):?>
+                                   <?php if($content->type == "відео"): ?>
+                                   <?= Html::a('X', ['delete-content', 'id' => $content->id], ['class' => 'btn btn-default']) ?>
+                                   <iframe width="560" height="315" src="https://www.youtube.com/embed/<?= $content->content ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                   <?php endif; ?>
+                                   <?php endforeach; ?>
+                                 </div>
+                                 <div id="tabs-2">
+                                 <?= Html::a('Завантажити фото', ['set-content', 'id' => $user_one->id], ['class' => 'btn btn-default']) ?>
+                                 <?php foreach($contents as $content):?>
+                                   <?php if($content->type == "фото"): ?>
+                                   <?= Html::a('X', ['delete-content', 'id' => $content->id, 'user_id'=>$user_one->id], ['class' => 'btn btn-default']) ?>
+                                   <img width="500px" src="<?= $content->getImage_content()?>">
+                               
+                                   <?php endif; ?>
+                                   <?php endforeach; ?>
+                                 </div>
+                            </div>         
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+                                       <script>
+                                 $( function() {
+                                   $( "#tabs" ).tabs();
+                                 } );
+                                 </script>

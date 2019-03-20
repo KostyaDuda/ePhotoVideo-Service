@@ -19,7 +19,7 @@ class ImageUpload extends Model{
     }
 
 
-    public function uploadFile(UploadedFile $file, $currentImage)
+    public function uploadFile(UploadedFile $file) //$currentImage
     {
         $this->image = $file;
        

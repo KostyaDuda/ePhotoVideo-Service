@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
     <?php $form = ActiveForm::begin(); ?>
-    <?= Html::a('Змынити фоторафію коритсувача', ['set-image', 'id' => $user_one->id], ['class' => 'btn btn-default']) ?>
+    <?= Html::a('Змінити фоторафію коритсувача', ['set-image', 'id' => $user_one->id], ['class' => 'btn btn-default']) ?>
     <?= $form->field($user_one, 'username')->textInput() ?>
 
       <?= $form->field($user_one, 'email')->textInput()?>

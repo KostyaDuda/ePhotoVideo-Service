@@ -149,11 +149,7 @@ class User_fv extends ActiveRecord implements \yii\web\IdentityInterface{
         return $this->save(false);
     }
 
-    public function saveArticle()
-    {
-        $this->user_id = Yii::$app->user->id;
-        return $this->save(false);
-    }
+
     public function saveImage($filename)
     {
         $this->img = $filename;

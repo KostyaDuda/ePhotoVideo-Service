@@ -84,10 +84,10 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
+    // public function actionAbout()
+    // {
+    //     return $this->render('about');
+    // }
 
     public function actionView($id)
     {
@@ -136,6 +136,23 @@ class SiteController extends Controller
         return $this->render('upload_avatar', ['model'=>$model]);
     }
 
+    public function actionSetContent($id)
+    {
+        $model = new ImageUpload;
+        if (Yii::$app->request->isPost)
+        {
+            $user = new User_content;
+            $file = UploadedFile::getInstance($model, 'image');
+
+            if($user->saveImage_content($model->uploadFile($file),"фото",$id))
+            {
+                return $this->redirect(['site/view', 'id'=>$id]);
+            }
+        }
+        
+        return $this->render('upload_avatar', ['model'=>$model]);
+    }
+
 
     public function actionRaiting()
     {
@@ -149,6 +166,12 @@ class SiteController extends Controller
             ]);
     }
 
+    public function actionDeleteContent($id,$user_id)
+    {
+        $content = User_content::find($id);
+        $content->delete();
+        return $this->redirect(['site/view', 'id'=>$user_id]);
+    }
 
 
 }
