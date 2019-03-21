@@ -110,13 +110,6 @@ class User_fv extends ActiveRecord implements \yii\web\IdentityInterface{
      */
     public static function findByUsername($username)
     {
-        // foreach (self::$users as $user) {
-        //     if (strcasecmp($user['username'], $username) === 0) {
-        //         return new static($user);
-        //     }
-        // }
-
-        // return null;
         return User_fv::find()->where(['username'=>$username])->one();
     }
     public function validatePassword($password)
@@ -163,6 +156,10 @@ class User_fv extends ActiveRecord implements \yii\web\IdentityInterface{
     public function getContent()
     {
         return $this->hasMany(User_content::className(), ['user_id' => 'id']);
+    }
+    public function getVacancy()
+    {
+        return $this->hasMany(Vacansy::className(), ['id_user' => 'id']);
     }
     
 }

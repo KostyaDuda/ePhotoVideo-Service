@@ -91,7 +91,7 @@ AppAsset::register($this);
                         <li><a href="/">Головна</a></li>
                         <li><a href="<?= Url::toRoute(['site/view', 'id'=>Yii::$app->user->id]);?>">Моя сторінка</a></li>
                         <li><a href="/site/raiting">Рейтинг колег</a></li>
-                        <li><a href="/">ВАКАНСІЇ</a></li>
+                        <li><a href="<?=Url::toRoute(['site/vacancy'])?>">ВАКАНСІЇ</a></li>
                         <li><a href="registr.html">Обговорення по тємі</a></li>
                         <li><a href="registr.html">Карта сокровіщ</a></li>
                         <!-- <li><a href="/site/login">Вийти</a></li> -->

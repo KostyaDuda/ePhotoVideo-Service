@@ -19,8 +19,11 @@ use yii\widgets\ActiveForm;
             </div>
         </div>
     </div>
+    <div class="container">
     <?php $form = ActiveForm::begin(); ?>
+    <div class="col-lg-5 col-md-5 col-12">
     <?= Html::a('Змінити фоторафію коритсувача', ['set-image', 'id' => $user_one->id], ['class' => 'btn btn-default']) ?>
+    
     <?= $form->field($user_one, 'username')->textInput() ?>
 
       <?= $form->field($user_one, 'email')->textInput()?>
@@ -32,7 +35,8 @@ use yii\widgets\ActiveForm;
       <?= $form->field($user_one, 'City')->textInput() ?>
 
       <?= $form->field($user_one, 'Filming_cities')->textInput() ?>
-
+        </div>
+        <div class="col-lg-5 col-md-5 col-12">
       <?= $form->field($user_one, 'phone')->textInput() ?>
 
       <?= $form->field($user_one, 'telegram')->textInput() ?>
@@ -44,7 +48,7 @@ use yii\widgets\ActiveForm;
       <?= $form->field($user_one, 'instagram')->textInput() ?>
 
       <?= $form->field($user_one, 'description')->textarea(['rows' => 10]) ?>
-
+        </div>
       <div class="form-group">
             <div class="col-lg-offset-1 col-lg-11">
                 <?= Html::submitButton('Зберегти', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
@@ -53,7 +57,7 @@ use yii\widgets\ActiveForm;
         
         <?php ActiveForm::end(); ?>
 
-       
+        </div>
 
        </div>
         <br>

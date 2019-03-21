@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="product-bit-title text-center">
-                                <h2>Sign up</h2>
+                                <h2>Реєстрація</h2>
                             </div>
                         </div>
                     </div>

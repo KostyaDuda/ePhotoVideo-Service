@@ -112,6 +112,7 @@ use yii\helpers\Html;
                                  </ul>
                                  <div id="tabs-1" class="tab-content">
                                  <?= Html::a('Додати відео', ['set-video', 'id' => $user_one->id], ['class' => 'btn btn-default']) ?>
+                                 <br>
                                    <?php foreach($contents as $content):?>
                                    <?php if($content->type == "відео"): ?>
                                    <?= Html::a('X', ['delete-content', 'id' => $content->id], ['class' => 'btn btn-default']) ?>                  
@@ -128,10 +129,49 @@ use yii\helpers\Html;
                                    <?php endif; ?>
                                    <?php endforeach; ?>
                                  </div>
-                            </div>         
+                             </div>         
                                                </div>
                                            </div>
                                        </div>
+                                <h2 class="related-products-title">Мої Вакансії</h2>
+                                    <div>
+                                    <?= Html::a('Додати Ваканцію', ['set-vacancy', 'id' => $user_one->id], ['class' => 'btn btn-default']) ?>
+                                    <?php foreach($vacancies as $vacancy):?>    
+                                    <?= Html::a('X', ['delete-vacancy', 'id' => $vacancy->id], ['class' => 'btn btn-default']) ?>                  
+                                        <div class="row">
+                    <div class=" col-lg-12 col-md-12 col-sm-12">
+                        <div class="single-shop-product">
+                            <div class="product-upper">
+                                <div class="name_in_raiting">
+                                    <h2><a  href="#"><?= $vacancy->title?></a></h2>
+                                
+                                 </div>
+                                 <div class="user-info">
+
+                                    <div class="map">
+                                        <img  width="32px"src="img/logo/map.png" >
+                                        <div class="film"><p id="filming_cities_vacancy"><?= $vacancy->location?></p></div>
+                                    </div>
+                                   
+                                     <div class="col-lg-6 block_price">
+                                     <div class="price-info product-inner-price">
+                                        <img src="img/logo/mon.png">
+                                       <p>від</p>
+                                        <ins>$<?= $vacancy->price?></ins>
+                                     </div>
+                                    </div>
+                                    <div class="col-lg-12 block_descripti">
+                                            <img src="img/logo/pen.png">
+                                            <p><?= $vacancy->desciption?></p>
+                                    </div>   
+                                </div>  
+                            </div>                     
+                        </div>
+                    </div>     
+                </div>  
+                                    <?php endforeach; ?>
+                                    </div>
+
                                        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
                                       
                                        <script>

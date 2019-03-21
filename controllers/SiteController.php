@@ -13,6 +13,7 @@ use app\models\ImageUpload;
 use app\models\ContactForm;
 use app\models\Raiting;
 use app\models\User_fv;
+use app\models\Vacancy;
 use app\models\User_content;
 use yii\data\Pagination;
 use yii\web\UploadedFile;
@@ -93,10 +94,12 @@ class SiteController extends Controller
     {
         $user_one = User_fv::findOne($id);
        $contents = User_content::find()->where(['user_id'=> $id])->all();
+       $vacancies = Vacancy::find()->where(['id_user'=> $id])->all();
         return $this->render('view',
         [
             'user_one'=>$user_one,
-            'contents' => $contents
+            'contents' => $contents,
+            'vacancies' => $vacancies
         ]
     );
     }
@@ -172,6 +175,20 @@ class SiteController extends Controller
         return $this->render('insert_video', ['model'=>$model]);
     }
 
+    public function actionSetVacancy()
+    {     
+        $model = new Vacancy();
+        if(Yii::$app->request->isPost)
+        {
+            $model->load(Yii::$app->request->post());
+            if($model->saveVacancy(Yii::$app->user->id))
+            {
+                return $this->redirect(['view','id'=>Yii::$app->user->id]);
+            }
+        }
+        return $this->render('insert_vacancy', ['model'=>$model]);
+    }
+
 
     public function actionRaiting()
     {
@@ -186,9 +203,30 @@ class SiteController extends Controller
             ]);
     }
 
+    public function actionVacancy()
+    {
+        $query = Vacancy::find();//->Where(['>', 'status', 0]);
+        $user = User_fv::find()->all();
+        $count = $query->count();
+        $pagination = new Pagination(['totalCount' => $count,'pageSize'=>1]);
+        $vacancies = $query->offset($pagination->offset)->limit($pagination->limit)->all();     
+        return $this->render('list_vacancy',[
+            'vacancies'=>$vacancies,
+            'pagination'=>$pagination,
+            'user' => $user
+            ]);
+    }
+
     public function actionDeleteContent($id)
     {
         $content = User_content::find()->where(['id'=>$id])->one();
+        $content->delete();
+
+        return $this->redirect(['view', 'id'=>Yii::$app->user->id]);
+    }
+    public function actionDeleteVacancy($id)
+    {
+        $content = Vacancy::find()->where(['id'=>$id])->one();
         $content->delete();
 
         return $this->redirect(['view', 'id'=>Yii::$app->user->id]);
