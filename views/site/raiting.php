@@ -97,7 +97,7 @@ use yii\widgets\LinkPager;
                             </div>
                              
                             <div class="product-option-shop">
-                                <a class="add_to_cart_button" href="user_page.html">Дивитись</a>
+                                <a class="add_to_cart_button" href="<?= Url::toRoute(['site/view', 'id'=>$user->id]);?>">Дивитись</a>
                             </div>                       
                         </div>
                     </div>

@@ -14,6 +14,8 @@ use app\models\ContactForm;
 use app\models\Raiting;
 use app\models\User_fv;
 use app\models\Vacancy;
+use app\models\Talking;
+use app\models\Coment;
 use app\models\User_content;
 use yii\data\Pagination;
 use yii\web\UploadedFile;
@@ -205,15 +207,13 @@ class SiteController extends Controller
 
     public function actionVacancy()
     {
-        $query = Vacancy::find();//->Where(['>', 'status', 0]);
-        $user = User_fv::find()->all();
+        $query = Vacancy::find();
         $count = $query->count();
         $pagination = new Pagination(['totalCount' => $count,'pageSize'=>1]);
         $vacancies = $query->offset($pagination->offset)->limit($pagination->limit)->all();     
         return $this->render('list_vacancy',[
             'vacancies'=>$vacancies,
             'pagination'=>$pagination,
-            'user' => $user
             ]);
     }
 
@@ -230,6 +230,62 @@ class SiteController extends Controller
         $content->delete();
 
         return $this->redirect(['view', 'id'=>Yii::$app->user->id]);
+    }
+    public function actionTalking()
+    {
+        $query = Talking::find();
+        $count = $query->count();
+        $pagination = new Pagination(['totalCount' => $count,'pageSize'=>1]);
+        $talkings = $query->offset($pagination->offset)->limit($pagination->limit)->all();     
+        return $this->render('list_talking',[
+            'pagination'=>$pagination,
+            'talkings' => $talkings,
+            ]);
+    }
+    public function actionViewTalking($id)
+    {
+       $model = new Coment();
+       $talking = Talking::findOne($id);
+       $coments = Coment::find()->where(['talking_id'=> $id])->all();
+       if(Yii::$app->request->isPost)
+        {
+            $model->load(Yii::$app->request->post());
+            if($model->saveComent(Yii::$app->user->id, $id))
+            {
+                return $this->redirect(['talking']);
+            }
+        }
+        return $this->render('view_talking',
+        [
+            'talking' => $talking,
+            'coments' => $coments,
+            'model' => $model
+        ]
+    );
+    }
+    public function actionSetTalking()
+    {     
+        $model = new Talking();
+        if(Yii::$app->request->isPost)
+        {
+            $model->load(Yii::$app->request->post());
+            if($model->saveTalking(Yii::$app->user->id))
+            {
+                return $this->redirect(['talking']);
+            }
+        }
+        return $this->render('insert_talking', ['model'=>$model]);
+    }
+    public function actionMyTalking()
+    {     
+        $query = Talking::find()->where(['user_create'=>Yii::$app->user->id]);
+        $count = $query->count();
+        $pagination = new Pagination(['totalCount' => $count,'pageSize'=>1]);
+        $talkings = $query->offset($pagination->offset)->limit($pagination->limit)->all();     
+        return $this->render('list_talking',[
+            'pagination'=>$pagination,
+            'talkings' => $talkings,
+            ]);
     }
 
 

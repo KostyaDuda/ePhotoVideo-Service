@@ -161,5 +161,9 @@ class User_fv extends ActiveRecord implements \yii\web\IdentityInterface{
     {
         return $this->hasMany(Vacansy::className(), ['id_user' => 'id']);
     }
+    public function getComment_()
+    {
+        return $this->hasMany(Coment::className(), ['id_user' => 'id']);
+    }
     
 }

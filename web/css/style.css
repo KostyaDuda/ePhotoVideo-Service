@@ -1187,6 +1187,9 @@ div.cart-collaterals ul.products li.product:hover .Pho{background-color: #222}
 .single-shop-product{
     height: 300px;
 }
+.single-shop-product_talking{
+    height: 170px;
+}
 .single-shop-product h2 {
     font-size: 20px;
     margin: 10px 0;
@@ -1201,6 +1204,11 @@ div.cart-collaterals ul.products li.product:hover .Pho{background-color: #222}
     transition: 0.2s;
     
     
+}
+.single-shop-product_talking:hover{
+
+    box-shadow: 0 0 5px;
+    transition: 0.2s;
 }
 
 .single-shop-product:hover{
