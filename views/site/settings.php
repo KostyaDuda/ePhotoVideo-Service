@@ -29,12 +29,13 @@ use yii\widgets\ActiveForm;
       <?= $form->field($user_one, 'email')->textInput()?>
 
       <?= $form->field($user_one, 'type')->textInput()?>
-
+      <?php if($user_one->type != "Користувач"): ?>
       <?= $form->field($user_one, 'price')->textInput() ?>
-
+      <?php endif; ?>
       <?= $form->field($user_one, 'City')->textInput() ?>
-
+      <?php if($user_one->type != "Користувач"): ?>
       <?= $form->field($user_one, 'Filming_cities')->textInput() ?>
+      <?php endif; ?>
         </div>
         <div class="col-lg-5 col-md-5 col-12">
       <?= $form->field($user_one, 'phone')->textInput() ?>
@@ -46,8 +47,9 @@ use yii\widgets\ActiveForm;
       <?= $form->field($user_one, 'facebook')->textInput() ?>
 
       <?= $form->field($user_one, 'instagram')->textInput() ?>
-
+      <?php if($user_one->type != "Користувач"): ?>
       <?= $form->field($user_one, 'description')->textarea(['rows' => 10]) ?>
+      <?php endif; ?>
         </div>
       <div class="form-group">
             <div class="col-lg-offset-1 col-lg-11">

@@ -11,10 +11,11 @@ class User_fv extends ActiveRecord implements \yii\web\IdentityInterface{
     public function rules()
     {
         return [
-            [['username','email','phone'], 'required'],
+            [['username','email','type','phone'], 'required'],
             [['username'], 'string'],
             [['email'], 'email'],
             [['price'], 'integer'],
+            [['type'], 'string'],
             [['City'], 'string'],
             [['Filming_cities'], 'string'],
             [['phone'], 'string'],
@@ -27,22 +28,22 @@ class User_fv extends ActiveRecord implements \yii\web\IdentityInterface{
         ];
     }
 
-    // private static $users = [
-    //     '100' => [
-    //         'id' => '100',
-    //         'username' => 'admin',
-    //         'password' => 'admin',
-    //         'authKey' => 'test100key',
-    //         'accessToken' => '100-token',
-    //     ],
-    //     '101' => [
-    //         'id' => '101',
-    //         'username' => 'demo',
-    //         'password' => 'demo',
-    //         'authKey' => 'test101key',
-    //         'accessToken' => '101-token',
-    //     ],
-    // ];
+    private static $users = [
+        '100' => [
+            'id' => '100',
+            'username' => 'admin',
+            'password' => 'admin',
+            'authKey' => 'test100key',
+            'accessToken' => '100-token',
+        ],
+        '101' => [
+            'id' => '101',
+            'username' => 'demo',
+            'password' => 'demo',
+            'authKey' => 'test101key',
+            'accessToken' => '101-token',
+        ],
+    ];
     public function attributeLabels()
     {
         return [
@@ -125,6 +126,8 @@ class User_fv extends ActiveRecord implements \yii\web\IdentityInterface{
             $user->email = $this->email;
             $user->type = $this->type;
             $user->City = $this->City;
+            $user->type = $this->type;
+            $user->price = $this->price;
             $user->Filming_cities = $this->Filming_cities;
             $user->phone = $this->phone;
             $user->telegram = $this->telegram;
@@ -132,7 +135,15 @@ class User_fv extends ActiveRecord implements \yii\web\IdentityInterface{
             $user->facebook = $this->facebook;
             $user->instagram = $this->instagram;
             $user->description = $this->description;
-            $user->status = 1;
+            if($user->type == "Користувач")
+            {
+                $user->status = 0;
+            }
+            else
+            {
+                $user->status = 1;
+            }
+            
             return $user->save();
         }
     }
@@ -165,5 +176,12 @@ class User_fv extends ActiveRecord implements \yii\web\IdentityInterface{
     {
         return $this->hasMany(Coment::className(), ['id_user' => 'id']);
     }
+
+
+    // public function afterDelete()
+    // {
+    //     Vacansy::deleteAll(['id_user' => $this->primaryKey]);
+    //     return parent::afterDelete();
+    // }
     
 }

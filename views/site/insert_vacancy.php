@@ -3,14 +3,24 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 ?>
-
-<h2>Сворення ваканції</h2>
+<div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>Сворення вакансії</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 <?php $form = ActiveForm::begin(); ?>
-
-      <?= $form->field($model, 'title')->textInput()?>
-      <?= $form->field($model, 'location')->textInput()?>
-      <?= $form->field($model, 'desciption')->textInput()?>
-      <?= $form->field($model, 'price')->textInput()?>
+<div class="container">
+      <?= $form->field($model, 'title')->textInput()->label("Заголовок")?>
+      <?= $form->field($model, 'location')->textInput()->label("Місто")?>
+      <?= $form->field($model, 'desciption')->textInput()->label("Опис")?>
+      <?= $form->field($model, 'price')->textInput(['placeholder'=>'$'])->label("Ціна")?>
      
 
       <div class="form-group">
@@ -18,4 +28,20 @@ use yii\widgets\ActiveForm;
                 <?= Html::submitButton('Зберегти', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
         </div>
+</div>
          <?php ActiveForm::end(); ?>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+

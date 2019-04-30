@@ -31,5 +31,10 @@ class Vacancy extends ActiveRecord{
         $vacan->title  = $this->title;
         return $vacan->save(false);
     }
+    public function getCity()
+    {
+       $sql = Vacancy::find()->andwhere(['location' => $this->location]);
+        return $sql;
+    }
 }
 

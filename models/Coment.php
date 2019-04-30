@@ -29,10 +29,13 @@ class Coment extends ActiveRecord{
     }  
     public function saveComent($user_id,$talk_id)
     {
+        if($this->validate())
+        {
         $coment = new Coment;
         $coment->talking_id = $talk_id;
         $coment->id_user =  $user_id;
         $coment->text = $this->text;
         return $coment->save(false);
+        }
     }
 }

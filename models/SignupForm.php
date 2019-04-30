@@ -1,25 +1,22 @@
 <?php
-
 namespace app\models;
-
 use yii\base\Model;
-
 class SignupForm extends Model
 {
     public $username;
     public $email;
     public $type;
     public $password;
-
     
     public function rules()
     {
         return [
-            [['username','email','password'], 'required'],
+            [['username','email','type','password'], 'required'],
             [['username'], 'string'],
             [['email'], 'email'],
             [['type'], 'string'],
-            [['email'], 'unique', 'targetClass'=>'app\models\User_fv', 'targetAttribute'=>'email']
+            [['email'], 'unique', 'targetClass'=>'app\models\User_fv', 'targetAttribute'=>'email'],
+            [['username'], 'unique', 'targetClass'=>'app\models\User_fv', 'targetAttribute'=>'username']
         ];
     }
     
@@ -32,9 +29,8 @@ class SignupForm extends Model
             $user->email = $this->email;
             $user->type = $this->type;
             $user->password = $this->password;
-            $user->status = 0;
             $user->img = "no-image.jpg";
-            return $user->save();
+            return $user->save(false);
         }
     }
 }

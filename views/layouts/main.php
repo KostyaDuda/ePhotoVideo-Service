@@ -42,9 +42,9 @@ AppAsset::register($this);
                     <div class="logo">
                         <h1><a href="/">e<span>PhotoVideo</span></a></h1>
                         <div class="logoII">
-                            <img class="position_logo" src="img/logo/videocam.png">
+                            <img class="position_logo" src="/img/logo/videocam.png">
                             <h2 class="position_logo">/</h2>
-                            <img class="position_logo" src="img/logo/photocame.png">
+                            <img class="position_logo" src="/img/logo/photocame.png">
                             </div>
                     </div>
                 </div>
@@ -90,9 +90,9 @@ AppAsset::register($this);
                     <ul class="nav navbar-nav list_margin_user">
                         <li><a href="/">Головна</a></li>
                         <li><a href="<?= Url::toRoute(['site/view', 'id'=>Yii::$app->user->id]);?>">Моя сторінка</a></li>
-                        <li><a href="/site/raiting">Рейтинг колег</a></li>
+                        <li><a href="/site/raiting">Шукати володарів фото\відео камер</a></li>
                         <li><a href="<?=Url::toRoute(['site/vacancy'])?>">ВАКАНСІЇ</a></li>
-                        <li><a href="<?=Url::toRoute(['site/talking'])?>">Обговорення по тємі</a></li>
+                        <li><a href="<?=Url::toRoute(['site/talking'])?>">Обговорення</a></li>
                         <li><a href="registr.html">Карта сокровіщ</a></li>
                         <!-- <li><a href="/site/login">Вийти</a></li> -->
                         <li>

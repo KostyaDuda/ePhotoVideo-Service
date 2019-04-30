@@ -33,7 +33,7 @@ use yii\widgets\LinkPager;
                                  <div class="user-info">
                                         
                                     <div>
-                                        <img width="30px" src="img/logo/user.png">
+                                        <img width="30px" src="/img/logo/user.png">
                                         <a  href="<?= Url::toRoute(['site/view', 'id'=>$talk->user_fv->id]);?>"><?= $talk->user_fv->username ?></a>
                                     </div> 
                                     <div class="product-option-shop">

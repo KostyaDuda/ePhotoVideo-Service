@@ -194,26 +194,42 @@ class SiteController extends Controller
 
     public function actionRaiting()
     {
-        $query = Raiting::find();//->Where(['>', 'status', 0]);
-        
+        $model = new Raiting;
+        if(Yii::$app->request->isPost){
+            $model->load(Yii::$app->request->post());
+            $query=$model->getSearch();
+        }
+        else{
+            $query = Raiting::find()->Where(['>', 'status', 0]);
+        }
         $count = $query->count();
-        $pagination = new Pagination(['totalCount' => $count,'pageSize'=>2]);
-        $users = $query->offset($pagination->offset)->limit($pagination->limit)->all();     
+        $pagination = new Pagination(['totalCount' => $count,'pageSize'=>4]);
+        $users = $query->offset($pagination->offset)->limit($pagination->limit)->all();
         return $this->render('raiting',[
             'users'=>$users,
-            'pagination'=>$pagination
+            'pagination'=>$pagination,
+            'model' => $model
             ]);
     }
 
+
     public function actionVacancy()
     {
-        $query = Vacancy::find();
+        $model = new Vacancy;
+        if(Yii::$app->request->isPost){
+            $model->load(Yii::$app->request->post());
+            $query=$model->getCity();
+        }
+        else{
+            $query = Vacancy::find();
+        }
         $count = $query->count();
-        $pagination = new Pagination(['totalCount' => $count,'pageSize'=>1]);
+        $pagination = new Pagination(['totalCount' => $count,'pageSize'=>3]);
         $vacancies = $query->offset($pagination->offset)->limit($pagination->limit)->all();     
         return $this->render('list_vacancy',[
             'vacancies'=>$vacancies,
             'pagination'=>$pagination,
+            'model' => $model
             ]);
     }
 
@@ -235,7 +251,7 @@ class SiteController extends Controller
     {
         $query = Talking::find();
         $count = $query->count();
-        $pagination = new Pagination(['totalCount' => $count,'pageSize'=>1]);
+        $pagination = new Pagination(['totalCount' => $count,'pageSize'=>3]);
         $talkings = $query->offset($pagination->offset)->limit($pagination->limit)->all();     
         return $this->render('list_talking',[
             'pagination'=>$pagination,
@@ -280,7 +296,7 @@ class SiteController extends Controller
     {     
         $query = Talking::find()->where(['user_create'=>Yii::$app->user->id]);
         $count = $query->count();
-        $pagination = new Pagination(['totalCount' => $count,'pageSize'=>1]);
+        $pagination = new Pagination(['totalCount' => $count,'pageSize'=>4]);
         $talkings = $query->offset($pagination->offset)->limit($pagination->limit)->all();     
         return $this->render('list_talking',[
             'pagination'=>$pagination,

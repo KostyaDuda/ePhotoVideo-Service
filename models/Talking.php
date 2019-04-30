@@ -25,11 +25,14 @@ class Talking extends ActiveRecord{
     }  
     public function saveTalking($id)
     {
+        if($this->validate())
+        {
         $talk = new Talking;
         $talk->user_create = $id;
         $talk->title =  $this->title;
         $talk->text = $this->text;
         return $talk->save(false);
+        }
     }
 }
 
